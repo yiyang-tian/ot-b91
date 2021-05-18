@@ -26,45 +26,44 @@
 #  POSSIBILITY OF SUCH DAMAGE.
 #
 
-add_library(openthread-cc2538
+add_library(openthread-b91
     alarm.c
     diag.c
     entropy.c
-    flash.c
+    flash_wrap.c
     misc.c
     radio.c
-    startup-gcc.c
     system.c
     logging.c
-    uart.c
+    uart_wrap.c
     $<TARGET_OBJECTS:openthread-platform-utils>
 )
 
 set_target_properties(
-    openthread-cc2538
+    openthread-b91
     PROPERTIES
         C_STANDARD 99
         CXX_STANDARD 11
 )
 
-target_link_libraries(openthread-cc2538
+target_link_libraries(openthread-b91
     PRIVATE
         ot-config
     PUBLIC
-        -T${PROJECT_SOURCE_DIR}/src/cc2538.ld
+        -T${PROJECT_SOURCE_DIR}/src/b91-xip.ld
         -Wl,--gc-sections -Wl,-Map=$<TARGET_PROPERTY:NAME>.map
 )
 
-target_compile_definitions(openthread-cc2538
+target_compile_definitions(openthread-b91
     PUBLIC
         ${OT_PLATFORM_DEFINES}
 )
 
-target_compile_options(openthread-cc2538 PRIVATE
+target_compile_options(openthread-b91 PRIVATE
     ${OT_CFLAGS}
 )
 
-target_include_directories(openthread-cc2538 PRIVATE
+target_include_directories(openthread-b91 PRIVATE
     ${OT_PUBLIC_INCLUDES}
     ${PROJECT_SOURCE_DIR}/openthread/examples/platforms
 )

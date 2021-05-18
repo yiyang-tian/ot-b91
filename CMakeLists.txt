@@ -27,9 +27,9 @@
 #
 
 cmake_minimum_required(VERSION 3.10.2)
-project(ot-cc2538 VERSION 0.2.0)
+project(ot-b91 VERSION 0.2.0)
 
-set(OT_PLATFORM_LIB "openthread-cc2538")
+set(OT_PLATFORM_LIB "openthread-b91")
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
@@ -38,13 +38,17 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
 add_subdirectory(openthread)
 
 target_compile_definitions(ot-config INTERFACE
-    OPENTHREAD_CONFIG_FILE="openthread-core-cc2538-config.h"
-    OPENTHREAD_PROJECT_CORE_CONFIG_FILE="openthread-core-cc2538-config.h"
-    OPENTHREAD_CORE_CONFIG_PLATFORM_CHECK_FILE="openthread-core-cc2538-config-check.h"
+    OPENTHREAD_CONFIG_FILE="openthread-core-b91-config.h"
+    OPENTHREAD_PROJECT_CORE_CONFIG_FILE="openthread-core-b91-config.h"
+    OPENTHREAD_CORE_CONFIG_PLATFORM_CHECK_FILE="openthread-core-b91-config-check.h"
 )
 
 target_include_directories(ot-config INTERFACE
     ${PROJECT_SOURCE_DIR}/src
+    ${PROJECT_SOURCE_DIR}/third_party/telink/b91/bootstrap
+    ${PROJECT_SOURCE_DIR}/third_party/telink/b91/common
+    ${PROJECT_SOURCE_DIR}/third_party/telink/b91/drivers
+    ${PROJECT_SOURCE_DIR}/third_party/telink/b91/drivers/reg_include
 )
 
 add_subdirectory(src)

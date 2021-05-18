@@ -27,14 +27,14 @@
 #
 
 set(CMAKE_SYSTEM_NAME              Generic)
-set(CMAKE_SYSTEM_PROCESSOR         ARM)
+set(CMAKE_SYSTEM_PROCESSOR         RISCV32)
 
-set(CMAKE_C_COMPILER               arm-none-eabi-gcc)
-set(CMAKE_CXX_COMPILER             arm-none-eabi-g++)
-set(CMAKE_ASM_COMPILER             arm-none-eabi-as)
-set(CMAKE_RANLIB                   arm-none-eabi-ranlib)
+set(CMAKE_C_COMPILER               riscv32-elf-gcc)
+set(CMAKE_CXX_COMPILER             riscv32-elf-g++)
+set(CMAKE_ASM_COMPILER             riscv32-elf-as)
+set(CMAKE_RANLIB                   riscv32-elf-ranlib)
 
-set(COMMON_C_FLAGS                 "-mthumb -fno-builtin -Wall -fdata-sections -ffunction-sections -mabi=aapcs -mcpu=cortex-m3 -mfloat-abi=soft")
+set(COMMON_C_FLAGS                 "-fno-builtin -Wall -fdata-sections -ffunction-sections -mcpu=d25f")
 
 set(CMAKE_C_FLAGS_INIT             "${COMMON_C_FLAGS} -std=gnu99")
 set(CMAKE_CXX_FLAGS_INIT           "${COMMON_C_FLAGS} -fno-exceptions -fno-rtti")
