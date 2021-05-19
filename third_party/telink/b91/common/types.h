@@ -63,9 +63,9 @@ typedef enum
 	TRUE
 }BOOL;
 
-#ifdef __GNUC__
-typedef	u16	wchar_t;
-#endif
+//#ifdef __GNUC__
+//typedef	u16	wchar_t;
+//#endif
 
 
 #endif /* TYPES_H_ */
