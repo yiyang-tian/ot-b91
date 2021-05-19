@@ -30,7 +30,9 @@ set(CMAKE_SYSTEM_NAME              Generic)
 set(CMAKE_SYSTEM_PROCESSOR         RISCV32)
 
 set(CMAKE_C_COMPILER               riscv32-elf-gcc)
+set(CMAKE_C_COMPILER_FORCED        TRUE)
 set(CMAKE_CXX_COMPILER             riscv32-elf-g++)
+set(CMAKE_CXX_COMPILER_FORCED      TRUE)
 set(CMAKE_ASM_COMPILER             riscv32-elf-as)
 set(CMAKE_RANLIB                   riscv32-elf-ranlib)
 
@@ -39,4 +41,4 @@ set(COMMON_C_FLAGS                 "-fno-builtin -Wall -fdata-sections -ffunctio
 set(CMAKE_C_FLAGS_INIT             "${COMMON_C_FLAGS} -std=gnu99")
 set(CMAKE_CXX_FLAGS_INIT           "${COMMON_C_FLAGS} -fno-exceptions -fno-rtti")
 set(CMAKE_ASM_FLAGS_INIT           "${COMMON_C_FLAGS}")
-set(CMAKE_EXE_LINKER_FLAGS_INIT    "${COMMON_C_FLAGS} -specs=nano.specs -specs=nosys.specs -nostartfiles")
+set(CMAKE_EXE_LINKER_FLAGS_INIT    "${COMMON_C_FLAGS} -nostartfiles -Wl,--gc-sections ")
