@@ -50,6 +50,8 @@ target_link_libraries(openthread-b91
     PRIVATE
         ot-config
     PUBLIC
+        -L${PROJECT_SOURCE_DIR}/third_party/telink/b91/lib
+        b91-drivers
         -T${PROJECT_SOURCE_DIR}/src/b91-xip.ld
         -Wl,--gc-sections -Wl,-Map=$<TARGET_PROPERTY:NAME>.map
 )
