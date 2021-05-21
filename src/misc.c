@@ -57,3 +57,9 @@ void otPlatAssertFail(const char *aFilename, int aLineNumber)
     OT_UNUSED_VARIABLE(aFilename);
     OT_UNUSED_VARIABLE(aLineNumber);
 }
+
+void otPlatWakeHost(void)
+{
+    // TODO: implement an operation to wake the host from sleep state.
+}
+

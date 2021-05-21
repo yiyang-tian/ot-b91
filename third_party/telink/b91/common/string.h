@@ -45,6 +45,11 @@
  *******************************************************************************************************/
 #pragma once
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #ifndef NULL
 #define NULL  0
 #endif
@@ -81,4 +86,6 @@ int ismemzero4(void *data, unsigned int len);
 void * memset4(void * dest, int val, unsigned int len);
 void zeromem4(void *data, unsigned int len);
 
-
+#ifdef __cplusplus
+}
+#endif

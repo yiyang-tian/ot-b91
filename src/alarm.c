@@ -48,7 +48,7 @@ static bool              sIsRunning = false;
 
 static inline uint32_t GetCurrentMs(uint32_t aMs, uint32_t aTick)
 {
-    return aMs + aTick / 16000;
+    return aMs + aTick / 24000;
 }
 
 void b91AlarmProcess(otInstance *aInstance)
@@ -56,7 +56,7 @@ void b91AlarmProcess(otInstance *aInstance)
     uint32_t t = sys_get_stimer_tick();
     if (t < sLastTick)
     {
-        sTime += (0xffffffff / 16000);
+        sTime += (0xffffffff / 24000);
     }
 
     sLastTick = t;
