@@ -8,34 +8,36 @@ This platform is intended for exprimentation and exploration of OpenThread, not 
 
 ## Build Environment
 
-Building the examples for the b91 requires [GNU AutoConf][gnu-autoconf], [GNU AutoMake][gnu-automake],[GNU Libtool][gnu-libtool], [Python][python], and the [Telink risc-v toolchain][telink-toolchain].
+Building the examples for the b91 requires [CMake][cmake], [Ninja][ninja], and the [Telink risc-v toolchain][telink-toolchain].
 
-After the Telink risc-v toolchain is installed, the Cygwin environment is installed too, considering the lack of building tools used by openthread, you should install these tools(AutoConf, AutoMake, Libtool) manually.
+[cmake]: https://cmake.org/
+[ninja]: https://ninja-build.org/
+[telink-toolchain]: http://wiki.telink-semi.cn/tools_and_sdk/Tools/IDE/telink_riscv_linux_toolchain.zip
 
-[gnu-autoconf]: https://www.gnu.org/software/autoconf
-[gnu-automake]: https://www.gnu.org/software/automake
-[gnu-libtool]: https://www.gnu.org/software/libtool
-[python]: https://www.python.org
-[telink-toolchain]: http://wiki.telink-semi.cn/tools_and_sdk/Tools/IDE/telink_v323_rds_official_windows.zip
+After these tools are installed, follow the instruction below to install other necessary tools.
+
+```bash
+$ cd <path-to-ot-b91>
+$ ./script/bootstrap
+```
 
 ## Building
 
 In a Bash terminal, follow these instructions to build the b91 examples.
 
 ```bash
-$ cd <path-to-openthread>
-$ ./bootstrap
-$ make -f examples/Makefile-b91
+$ cd <path-to-ot-b91>
+$ ./script/build
 ```
 
 ## Flash Binaries
 
-If the build completed successfully, the `elf` files may be found in `<path-to-openthread>/output/b91/bin`.
+If the build completed successfully, the `elf` files may be found in `<path-to-ot-b91>/build/bin`.
 
 You can download the [BDT tool][bdt-tool] and refer to the [user guide][user-guide] provided by Telink to burn the images to the board, in order to load the images with the [BDT tool][bdt-tool], the images must be converted to `bin`. This is done using `riscv32-elf-objcopy`
 
 ```bash
-$ cd <path-to-openthread>/output/b91/bin
+$ cd <path-to-ot-b91>/build/bin
 $ riscv32-elf-objcopy -S -O binary ot-cli-ftd ot-cli-ftd.bin
 ```
 
@@ -54,7 +56,7 @@ $ riscv32-elf-objcopy -S -O binary ot-cli-ftd ot-cli-ftd.bin
 2. Type `help` for a list of commands
 3. follow the instructions in the [CLI README][cli-readme] for instructions on setting up a network
 
-[cli-readme]: ../../../src/cli/README.md
+[cli-readme]: ./openthread/src/cli/README.md
 
 ```bash
 > help
