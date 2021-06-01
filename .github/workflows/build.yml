@@ -62,27 +62,15 @@ jobs:
       run: |
         script/make-pretty check
 
-  arm-gcc:
-    name: arm-gcc-${{ matrix.gcc_ver }}
+  riscv32-gcc:
+    name: riscv32-gcc-${{ matrix.gcc_ver }}
     runs-on: ubuntu-18.04
     strategy:
       matrix:
         include:
-          - gcc_ver: 4
-            gcc_download_url: https://launchpad.net/gcc-arm-embedded/4.9/4.9-2015-q3-update/+download/gcc-arm-none-eabi-4_9-2015q3-20150921-linux.tar.bz2
-            gcc_extract_dir: gcc-arm-none-eabi-4_9-2015q3
-          - gcc_ver: 5
-            gcc_download_url: https://developer.arm.com/-/media/Files/downloads/gnu-rm/5_4-2016q3/gcc-arm-none-eabi-5_4-2016q3-20160926-linux.tar.bz2
-            gcc_extract_dir: gcc-arm-none-eabi-5_4-2016q3
-          - gcc_ver: 6
-            gcc_download_url: https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/gcc-arm-none-eabi-6-2017-q2-update-linux.tar.bz2
-            gcc_extract_dir: gcc-arm-none-eabi-6-2017-q2-update
           - gcc_ver: 7
-            gcc_download_url: https://developer.arm.com/-/media/Files/downloads/gnu-rm/7-2018q2/gcc-arm-none-eabi-7-2018-q2-update-linux.tar.bz2
-            gcc_extract_dir: gcc-arm-none-eabi-7-2018-q2-update
-          - gcc_ver: 9
-            gcc_download_url: https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2019q4/RC2.1/gcc-arm-none-eabi-9-2019-q4-major-x86_64-linux.tar.bz2
-            gcc_extract_dir: gcc-arm-none-eabi-9-2019-q4-major
+            gcc_download_url: http://wiki.telink-semi.cn/tools_and_sdk/Tools/IDE/telink_riscv_linux_toolchain.zip
+            gcc_extract_dir: telink_riscv_linux_toolchain
     steps:
     - uses: actions/checkout@v2
       with:
@@ -92,12 +80,13 @@ jobs:
         cd /tmp
         sudo rm /etc/apt/sources.list.d/* && sudo apt-get update
         sudo apt-get --no-install-recommends install -y lib32z1 ninja-build
-        wget ${{ matrix.gcc_download_url }} -O gcc-arm.tar.bz2
-        tar xjf gcc-arm.tar.bz2
+        sudo apt-get install unzip
+        wget ${{ matrix.gcc_download_url }} -O gcc-riscv32.zip
+        unzip gcc-riscv32.zip
         # use the minimal required cmake version
         sudo pip3 install --system -U cmake==3.10.3
         cmake --version | grep 3.10.3
     - name: Build
       run: |
-        export PATH=/tmp/${{ matrix.gcc_extract_dir }}/bin:$PATH
+        export PATH=/tmp/${{ matrix.gcc_extract_dir }}/nds32le-elf-mculib-v5f/bin:$PATH
         script/test
