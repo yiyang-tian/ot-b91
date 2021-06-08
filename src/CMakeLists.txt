@@ -53,6 +53,7 @@ target_link_libraries(openthread-b91
     PUBLIC
         -L${PROJECT_SOURCE_DIR}/third_party/telink/b91/lib
         -T${PROJECT_SOURCE_DIR}/src/b91-xip.ld
+		-nostartfiles
         -Wl,--gc-sections -Wl,-Map=$<TARGET_PROPERTY:NAME>.map
 )
 

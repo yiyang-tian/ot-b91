@@ -81,6 +81,7 @@ jobs:
         sudo rm /etc/apt/sources.list.d/* && sudo apt-get update
         sudo apt-get --no-install-recommends install -y lib32z1 ninja-build
         sudo apt-get install unzip
+        sudo apt-get install libncurses5:i386
         wget ${{ matrix.gcc_download_url }} -O gcc-riscv32.zip
         unzip gcc-riscv32.zip
         # use the minimal required cmake version
